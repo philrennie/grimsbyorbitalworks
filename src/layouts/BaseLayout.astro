@@ -18,8 +18,16 @@ const { title, description = SITE_DESCRIPTION, image } = Astro.props;
 <html lang="en">
   <head>
     <BaseHead title={title} description={description} image={image} />
+    <script is:inline>
+      (function() {
+        var stored = localStorage.getItem('theme');
+        if (stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
   </head>
-  <body>
+  <body class="dark:bg-hull-dark dark:text-seal-light transition-colors">
     <Header />
     <main class="min-h-screen">
       <slot />

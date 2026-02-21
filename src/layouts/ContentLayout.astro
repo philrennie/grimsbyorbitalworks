@@ -15,7 +15,7 @@ const { title, description, pubDate, updatedDate, image } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description} image={image}>
-  <article class="max-w-3xl mx-auto px-4 py-12">
+  <article class="max-w-4xl mx-auto px-4 py-12">
     <header class="mb-8">
       <p class="text-sm text-plate-grey mb-2">
         <FormattedDate date={pubDate} />
@@ -25,8 +25,8 @@ const { title, description, pubDate, updatedDate, image } = Astro.props;
           </span>
         )}
       </p>
-      <h1 class="text-4xl font-bold text-hull-dark mb-3">{title}</h1>
-      <p class="text-lg text-plate-grey">{description}</p>
+      <h1 class="text-4xl font-bold text-hull-dark dark:text-workshop-white mb-3">{title}</h1>
+      <p class="text-lg text-plate-grey dark:text-seal-light">{description}</p>
       <div class="h-0.5 bg-gow-yellow mt-6 w-16"></div>
     </header>
     <div class="prose">

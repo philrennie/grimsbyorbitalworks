@@ -7,9 +7,9 @@ const entries = (await getCollection('company', ({ data }) => !data.draft))
 ---
 
 <BaseLayout title="The Company" description="Four centuries of GOW history, people, yards, and culture.">
-  <section class="max-w-3xl mx-auto px-4 py-12">
-    <h1 class="text-3xl font-bold text-hull-dark mb-2">The Company</h1>
-    <p class="text-plate-grey mb-8">
+  <section class="max-w-4xl mx-auto px-4 py-12">
+    <h1 class="text-3xl font-bold text-hull-dark dark:text-workshop-white mb-2">The Company</h1>
+    <p class="text-plate-grey dark:text-seal-light mb-8">
       GOW's history, people, yards, competitors, and culture. Four hundred years
       of institutional stubbornness, reconstructed from the famously inconsistent archives.
     </p>
@@ -21,11 +21,11 @@ const entries = (await getCollection('company', ({ data }) => !data.draft))
       <ul class="space-y-4">
         {entries.map((entry) => (
           <li>
-            <a href={`/company/${entry.id}`} class="group block border border-seal-light rounded-lg p-5 hover:border-gow-yellow transition-colors bg-white">
-              <h3 class="text-lg font-bold text-hull-dark group-hover:text-gow-yellow-dark transition-colors">
+            <a href={`/company/${entry.id}`} class="group block border border-seal-light dark:border-hull-light rounded-lg p-5 hover:border-gow-yellow transition-colors bg-white dark:bg-hull-mid">
+              <h3 class="text-lg font-bold text-hull-dark dark:text-workshop-white group-hover:text-gow-yellow-dark transition-colors">
                 {entry.data.title}
               </h3>
-              <p class="text-sm text-hull-mid">{entry.data.description}</p>
+              <p class="text-sm text-hull-mid dark:text-plate-grey">{entry.data.description}</p>
             </a>
           </li>
         ))}

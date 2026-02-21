@@ -33,6 +33,9 @@
   --font-serif: 'Merriweather', 'Georgia', serif;
 }
 
+/* ── Dark mode via .dark class on <html> ── */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* Base */
 html {
   scroll-behavior: smooth;
@@ -44,11 +47,17 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dark body {
+  background-color: var(--color-hull-dark);
+  color: var(--color-seal-light);
 }
 
 /* Prose — long-form content styling */
 .prose {
-  max-width: 65ch;
+  max-width: 80ch;
   margin-left: auto;
   margin-right: auto;
 }
@@ -61,6 +70,9 @@ body {
   margin-bottom: 1rem;
   color: var(--color-hull-dark);
 }
+.dark .prose h1 {
+  color: var(--color-workshop-white);
+}
 
 .prose h2 {
   font-size: 1.5rem;
@@ -69,6 +81,9 @@ body {
   margin-top: 2rem;
   margin-bottom: 0.75rem;
   color: var(--color-hull-dark);
+}
+.dark .prose h2 {
+  color: var(--color-seal-light);
 }
 
 .prose h3 {
@@ -79,6 +94,9 @@ body {
   margin-bottom: 0.5rem;
   color: var(--color-hull-mid);
 }
+.dark .prose h3 {
+  color: var(--color-plate-grey);
+}
 
 .prose p {
   font-size: 1rem;
@@ -86,12 +104,19 @@ body {
   margin-bottom: 1rem;
   color: var(--color-hull-mid);
 }
+.dark .prose p {
+  color: var(--color-seal-light);
+}
 
 .prose a {
   color: var(--color-gow-yellow-dark);
   text-decoration: underline;
   text-decoration-color: rgb(212 168 67 / 0.4);
   transition: text-decoration-color 0.15s ease;
+}
+.dark .prose a {
+  color: var(--color-gow-yellow);
+  text-decoration-color: rgb(255 209 0 / 0.4);
 }
 
 .prose a:hover {
@@ -107,6 +132,9 @@ body {
   margin-bottom: 0.25rem;
   color: var(--color-hull-mid);
 }
+.dark .prose li {
+  color: var(--color-seal-light);
+}
 
 .prose blockquote {
   border-left: 4px solid var(--color-gow-yellow);
@@ -116,6 +144,9 @@ body {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 }
+.dark .prose blockquote {
+  color: var(--color-seal-light);
+}
 
 .prose code {
   background-color: rgb(209 213 219 / 0.6);
@@ -123,6 +154,10 @@ body {
   border-radius: 0.25rem;
   font-size: 0.875rem;
   font-family: var(--font-mono);
+}
+.dark .prose code {
+  background-color: var(--color-hull-light);
+  color: var(--color-seal-light);
 }
 
 .prose pre {
@@ -133,6 +168,10 @@ body {
   overflow-x: auto;
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
+}
+.dark .prose pre {
+  background-color: #111318;
+  border: 1px solid var(--color-hull-light);
 }
 
 .prose pre code {
@@ -145,12 +184,22 @@ body {
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
+.dark .prose hr {
+  border-color: var(--color-hull-light);
+}
 
 .prose img {
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
+}
+
+.prose strong {
+  color: inherit;
+}
+.dark .prose strong {
+  color: var(--color-workshop-white);
 }
 
 /* Footnote references — superscript numbers */
@@ -174,6 +223,9 @@ body {
   border-top: 1px solid var(--color-seal-light);
   font-size: 0.875rem;
   color: var(--color-plate-grey);
+}
+.dark .prose .footnotes {
+  border-top-color: var(--color-hull-light);
 }
 
 .prose .footnotes ol {
@@ -205,6 +257,10 @@ body {
   line-height: 1.5;
   pointer-events: auto;
   border: 1px solid var(--color-hull-light);
+}
+.dark .footnote-popover {
+  background-color: var(--color-hull-mid);
+  border-color: var(--color-hull-light);
 }
 
 .footnote-popover[hidden] {

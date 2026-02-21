@@ -45,7 +45,7 @@ const statusColour: Record<string, string> = {
 ---
 
 <BaseLayout title={name} description={description} image={image}>
-  <article class="max-w-3xl mx-auto px-4 py-12">
+  <article class="max-w-4xl mx-auto px-4 py-12">
     <!-- Ship header -->
     <header class="mb-10">
       <p class="text-sm text-plate-grey mb-1">
@@ -56,27 +56,27 @@ const statusColour: Record<string, string> = {
           </span>
         )}
       </p>
-      <h1 class="text-4xl font-bold text-hull-dark mb-2">{name}</h1>
-      <p class="text-lg text-plate-grey mb-4">{description}</p>
+      <h1 class="text-4xl font-bold text-hull-dark dark:text-workshop-white mb-2">{name}</h1>
+      <p class="text-lg text-plate-grey dark:text-seal-light mb-4">{description}</p>
 
       <!-- Ship specs strip -->
-      <div class="flex flex-wrap gap-6 text-sm border-t border-b border-seal-light py-3 mt-4">
+      <div class="flex flex-wrap gap-6 text-sm border-t border-b border-seal-light dark:border-hull-light py-3 mt-4">
         {shipClass && (
           <div>
             <span class="text-plate-grey">Class:</span>
-            <span class="font-medium text-hull-dark ml-1">{shipClass}</span>
+            <span class="font-medium text-hull-dark dark:text-workshop-white ml-1">{shipClass}</span>
           </div>
         )}
         {classification && (
           <div>
             <span class="text-plate-grey">Type:</span>
-            <span class="font-medium text-hull-dark ml-1">{classification}</span>
+            <span class="font-medium text-hull-dark dark:text-workshop-white ml-1">{classification}</span>
           </div>
         )}
         {builtYear && (
           <div>
             <span class="text-plate-grey">Built:</span>
-            <span class="font-medium text-hull-dark ml-1">{builtYear}</span>
+            <span class="font-medium text-hull-dark dark:text-workshop-white ml-1">{builtYear}</span>
           </div>
         )}
         <div>

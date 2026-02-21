@@ -8,9 +8,9 @@ const posts = (await getCollection('journal', ({ data }) => !data.draft))
 ---
 
 <BaseLayout title="The Journal" description="Build updates, lore drops, reflections, and site news.">
-  <section class="max-w-3xl mx-auto px-4 py-12">
-    <h1 class="text-3xl font-bold text-hull-dark mb-2">The Journal</h1>
-    <p class="text-plate-grey mb-8">
+  <section class="max-w-4xl mx-auto px-4 py-12">
+    <h1 class="text-3xl font-bold text-hull-dark dark:text-workshop-white mb-2">The Journal</h1>
+    <p class="text-plate-grey dark:text-seal-light mb-8">
       Build updates, lore discoveries, occasional reflections, and notes on what's
       happening with the site. The informal log of an ongoing obsession.
     </p>
@@ -24,10 +24,10 @@ const posts = (await getCollection('journal', ({ data }) => !data.draft))
           <li>
             <a href={`/journal/${post.id}`} class="group block">
               <p class="text-xs text-plate-grey"><FormattedDate date={post.data.pubDate} /></p>
-              <h3 class="text-lg font-semibold text-hull-dark group-hover:text-gow-yellow-dark transition-colors">
+              <h3 class="text-lg font-semibold text-hull-dark dark:text-seal-light group-hover:text-gow-yellow-dark transition-colors">
                 {post.data.title}
               </h3>
-              <p class="text-sm text-hull-mid">{post.data.description}</p>
+              <p class="text-sm text-hull-mid dark:text-plate-grey">{post.data.description}</p>
             </a>
           </li>
         ))}

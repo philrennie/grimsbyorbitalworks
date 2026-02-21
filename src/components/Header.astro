@@ -1,5 +1,6 @@
 ---
 import { SITE_TITLE, NAV_LINKS } from '../consts';
+import ThemeToggle from './ThemeToggle.astro';
 
 const currentPath = Astro.url.pathname;
 ---
@@ -8,27 +9,97 @@ const currentPath = Astro.url.pathname;
   <!-- GOW Yellow stripe — the signature -->
   <div class="h-1 bg-gow-yellow"></div>
 
-  <nav class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-    <!-- Site title -->
-    <a href="/" class="text-xl font-bold tracking-tight text-white hover:text-gow-yellow transition-colors">
-      {SITE_TITLE}
-    </a>
+  <nav class="max-w-6xl mx-auto px-4 py-4">
+    <div class="flex items-center justify-between">
+      <!-- Site title -->
+      <a href="/" class="text-xl font-bold tracking-tight text-white hover:text-gow-yellow transition-colors shrink-0">
+        {SITE_TITLE}
+      </a>
 
-    <!-- Navigation -->
-    <ul class="flex gap-6 text-sm font-medium">
-      {NAV_LINKS.map(({ label, href }) => (
-        <li>
-          <a
-            href={href}
-            class:list={[
-              'hover:text-gow-yellow transition-colors',
-              currentPath.startsWith(href) ? 'text-gow-yellow' : 'text-seal-light',
-            ]}
-          >
-            {label}
-          </a>
-        </li>
-      ))}
-    </ul>
+      <!-- Right side: nav + controls -->
+      <div class="flex items-center gap-4">
+        <!-- Desktop navigation (hidden on mobile) -->
+        <ul class="hidden md:flex gap-6 text-sm font-medium">
+          {NAV_LINKS.map(({ label, href }) => (
+            <li>
+              <a
+                href={href}
+                class:list={[
+                  'hover:text-gow-yellow transition-colors',
+                  currentPath.startsWith(href) ? 'text-gow-yellow' : 'text-seal-light',
+                ]}
+              >
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <!-- Theme toggle (always visible) -->
+        <ThemeToggle />
+
+        <!-- Hamburger button (mobile only) -->
+        <button
+          id="mobile-menu-btn"
+          type="button"
+          class="p-2 rounded-md text-seal-light hover:text-gow-yellow transition-colors md:hidden"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+        >
+          <!-- Hamburger icon -->
+          <svg id="menu-icon-open" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <!-- Close icon -->
+          <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden mt-4 pb-2 border-t border-hull-light pt-4">
+      <ul class="flex flex-col gap-3 text-sm font-medium">
+        {NAV_LINKS.map(({ label, href }) => (
+          <li>
+            <a
+              href={href}
+              class:list={[
+                'block py-1 hover:text-gow-yellow transition-colors',
+                currentPath.startsWith(href) ? 'text-gow-yellow' : 'text-seal-light',
+              ]}
+            >
+              {label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
   </nav>
 </header>
+
+<script>
+  function initMobileMenu() {
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    const iconOpen = document.getElementById('menu-icon-open');
+    const iconClose = document.getElementById('menu-icon-close');
+    if (!btn || !menu || !iconOpen || !iconClose) return;
+
+    btn.addEventListener('click', () => {
+      const isOpen = !menu.classList.contains('hidden');
+      menu.classList.toggle('hidden', isOpen);
+      iconOpen.classList.toggle('hidden', !isOpen);
+      iconClose.classList.toggle('hidden', isOpen);
+      btn.setAttribute('aria-expanded', String(!isOpen));
+    });
+  }
+
+  document.addEventListener('astro:page-load', initMobileMenu);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMobileMenu);
+  } else {
+    initMobileMenu();
+  }
+</script>

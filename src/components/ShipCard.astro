@@ -1,0 +1,33 @@
+---
+interface Props {
+  name: string;
+  description: string;
+  slug: string;
+  status?: string;
+  shipClass?: string;
+}
+
+const { name, description, slug, status = 'active', shipClass } = Astro.props;
+
+const statusColour: Record<string, string> = {
+  active: 'bg-green-600',
+  decommissioned: 'bg-plate-grey',
+  lost: 'bg-red-700',
+  unknown: 'bg-amber-600',
+  refit: 'bg-gow-yellow',
+};
+---
+
+<a href={`/ships/${slug}`} class="block group">
+  <article class="border border-seal-light rounded-lg p-5 hover:border-gow-yellow transition-colors bg-white">
+    <div class="flex items-center gap-3 mb-2">
+      <h3 class="text-lg font-bold text-hull-dark group-hover:text-gow-yellow-dark transition-colors">
+        {name}
+      </h3>
+      <span class={`inline-block w-2 h-2 rounded-full ${statusColour[status] || statusColour.unknown}`}
+        title={status}></span>
+    </div>
+    {shipClass && <p class="text-xs text-plate-grey uppercase tracking-wide mb-2">{shipClass}</p>}
+    <p class="text-sm text-hull-mid">{description}</p>
+  </article>
+</a>

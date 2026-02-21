@@ -1,0 +1,97 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+
+interface Props {
+  name: string;
+  description: string;
+  shipClass?: string;
+  classification?: string;
+  status?: string;
+  builtYear?: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  image?: string;
+}
+
+const {
+  name,
+  description,
+  shipClass,
+  classification,
+  status = 'active',
+  builtYear,
+  pubDate,
+  updatedDate,
+  image,
+} = Astro.props;
+
+const statusLabel: Record<string, string> = {
+  active: 'Active Service',
+  decommissioned: 'Decommissioned',
+  lost: 'Lost',
+  unknown: 'Status Unknown',
+  refit: 'Under Refit',
+};
+
+const statusColour: Record<string, string> = {
+  active: 'text-green-600',
+  decommissioned: 'text-plate-grey',
+  lost: 'text-red-600',
+  unknown: 'text-amber-600',
+  refit: 'text-gow-yellow-dark',
+};
+---
+
+<BaseLayout title={name} description={description} image={image}>
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <!-- Ship header -->
+    <header class="mb-10">
+      <p class="text-sm text-plate-grey mb-1">
+        <FormattedDate date={pubDate} />
+        {updatedDate && (
+          <span class="italic ml-2">
+            (updated <FormattedDate date={updatedDate} />)
+          </span>
+        )}
+      </p>
+      <h1 class="text-4xl font-bold text-hull-dark mb-2">{name}</h1>
+      <p class="text-lg text-plate-grey mb-4">{description}</p>
+
+      <!-- Ship specs strip -->
+      <div class="flex flex-wrap gap-6 text-sm border-t border-b border-seal-light py-3 mt-4">
+        {shipClass && (
+          <div>
+            <span class="text-plate-grey">Class:</span>
+            <span class="font-medium text-hull-dark ml-1">{shipClass}</span>
+          </div>
+        )}
+        {classification && (
+          <div>
+            <span class="text-plate-grey">Type:</span>
+            <span class="font-medium text-hull-dark ml-1">{classification}</span>
+          </div>
+        )}
+        {builtYear && (
+          <div>
+            <span class="text-plate-grey">Built:</span>
+            <span class="font-medium text-hull-dark ml-1">{builtYear}</span>
+          </div>
+        )}
+        <div>
+          <span class="text-plate-grey">Status:</span>
+          <span class={`font-medium ml-1 ${statusColour[status] || statusColour.unknown}`}>
+            {statusLabel[status] || status}
+          </span>
+        </div>
+      </div>
+
+      <div class="h-0.5 bg-gow-yellow mt-6 w-16"></div>
+    </header>
+
+    <!-- Ship content (story, build log, archive fragments) -->
+    <div class="prose">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>

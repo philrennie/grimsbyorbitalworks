@@ -1,0 +1,28 @@
+---
+import ShipLayout from '../../layouts/ShipLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const ships = await getCollection('ships');
+  return ships.map((ship) => ({
+    params: { slug: ship.id },
+    props: ship,
+  }));
+}
+
+const ship = Astro.props;
+const { Content } = await render(ship);
+---
+
+<ShipLayout
+  name={ship.data.name}
+  description={ship.data.description}
+  shipClass={ship.data.shipClass}
+  classification={ship.data.classification}
+  status={ship.data.status}
+  builtYear={ship.data.builtYear}
+  pubDate={ship.data.pubDate}
+  updatedDate={ship.data.updatedDate}
+>
+  <Content />
+</ShipLayout>

@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const entries = (await getCollection('company', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.sortOrder - b.data.sortOrder);
+---
+
+<BaseLayout title="The Company" description="Four centuries of GOW history, people, yards, and culture.">
+  <section class="max-w-3xl mx-auto px-4 py-12">
+    <h1 class="text-3xl font-bold text-hull-dark mb-2">The Company</h1>
+    <p class="text-plate-grey mb-8">
+      GOW's history, people, yards, competitors, and culture. Four hundred years
+      of institutional stubbornness, reconstructed from the famously inconsistent archives.
+    </p>
+    <div class="h-0.5 bg-gow-yellow w-16 mb-8"></div>
+
+    {entries.length === 0 ? (
+      <p class="text-plate-grey italic">The archives are being organised. Check back soon.</p>
+    ) : (
+      <ul class="space-y-4">
+        {entries.map((entry) => (
+          <li>
+            <a href={`/company/${entry.id}`} class="group block border border-seal-light rounded-lg p-5 hover:border-gow-yellow transition-colors bg-white">
+              <h3 class="text-lg font-bold text-hull-dark group-hover:text-gow-yellow-dark transition-colors">
+                {entry.data.title}
+              </h3>
+              <p class="text-sm text-hull-mid">{entry.data.description}</p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </section>
+</BaseLayout>

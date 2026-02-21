@@ -4,10 +4,14 @@ interface Props {
 }
 
 const { date } = Astro.props;
+
+// Display date +400 years (in-universe) while keeping real date in datetime attribute
+const displayDate = new Date(date);
+displayDate.setFullYear(displayDate.getFullYear() + 400);
 ---
 
 <time datetime={date.toISOString()}>
-  {date.toLocaleDateString('en-GB', {
+  {displayDate.toLocaleDateString('en-GB', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',

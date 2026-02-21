@@ -152,3 +152,67 @@ body {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 }
+
+/* Footnote references — superscript numbers */
+.prose sup a[data-footnote-ref] {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-gow-yellow-dark);
+  text-decoration: none;
+  padding: 0 0.15em;
+  cursor: help;
+}
+
+.prose sup a[data-footnote-ref]:hover {
+  color: var(--color-gow-yellow);
+}
+
+/* Footnotes section at bottom */
+.prose .footnotes {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-seal-light);
+  font-size: 0.875rem;
+  color: var(--color-plate-grey);
+}
+
+.prose .footnotes ol {
+  padding-left: 1.25rem;
+}
+
+.prose .footnotes li {
+  color: var(--color-plate-grey);
+  margin-bottom: 0.5rem;
+}
+
+.prose .footnotes li p {
+  color: var(--color-plate-grey);
+  font-size: 0.875rem;
+  display: inline;
+}
+
+/* Footnote popover */
+.footnote-popover {
+  position: absolute;
+  z-index: 50;
+  max-width: 28rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--color-hull-dark);
+  color: var(--color-seal-light);
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.25), 0 8px 10px -6px rgb(0 0 0 / 0.2);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  pointer-events: auto;
+  border: 1px solid var(--color-hull-light);
+}
+
+.footnote-popover[hidden] {
+  display: none;
+}
+
+.footnote-popover p {
+  margin: 0;
+  color: var(--color-seal-light);
+  font-size: 0.8125rem;
+}

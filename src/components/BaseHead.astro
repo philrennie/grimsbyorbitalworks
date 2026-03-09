@@ -42,3 +42,12 @@ const pageTitle = title === SITE_TITLE ? title : `${title} — ${SITE_TITLE}`;
 <meta property="twitter:title" content={pageTitle} />
 <meta property="twitter:description" content={description} />
 {image && <meta property="twitter:image" content={new URL(image, Astro.url)} />}
+
+<!-- Analytics -->
+<!-- Privacy-friendly analytics by Plausible -->
+<script async src="https://analytics.philrennie.co.uk/js/pa-hWi5mqDR0a5Eo2jshYdQb.js"></script>
+<script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script>
+
